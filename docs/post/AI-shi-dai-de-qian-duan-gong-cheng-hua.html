@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="缘起：如何让 AI 的产出更可控、更稳定、更生产级？
+**一、目前主流的AI Coding 范式**
+1.1 氛围编码（Vibe Coding）
+“能运行”比“运行得好”更重要/你管我咋实现的，结果对就行！
+Vibe Coding 压根就不关心你代码具体怎么实现的，核心关注点是代码生成的结果对不对。">
+<meta property="og:title" content="AI时代的前端工程化">
+<meta property="og:description" content="缘起：如何让 AI 的产出更可控、更稳定、更生产级？
+**一、目前主流的AI Coding 范式**
+1.1 氛围编码（Vibe Coding）
+“能运行”比“运行得好”更重要/你管我咋实现的，结果对就行！
+Vibe Coding 压根就不关心你代码具体怎么实现的，核心关注点是代码生成的结果对不对。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Zhou-Shuwu.github.io/zhoushuwu.github.io/post/AI-shi-dai-de-qian-duan-gong-cheng-hua.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>AI时代的前端工程化</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">AI时代的前端工程化</h1>
+<div class="title-right">
+    <a href="https://Zhou-Shuwu.github.io/zhoushuwu.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Zhou-Shuwu/zhoushuwu.github.io/issues/2" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>缘起：如何让 AI 的产出更可控、更稳定、更生产级？<br>
+<strong>一、目前主流的AI Coding 范式</strong><br>
+1.1 氛围编码（Vibe Coding）<br>
+“能运行”比“运行得好”更重要/你管我咋实现的，结果对就行！<br>
+Vibe Coding 压根就不关心你代码具体怎么实现的，核心关注点是代码生成的结果对不对。至于实现逻辑、底层细节这些繁琐的活，都交给 AI 去搞定。我只需要盯着效果，觉得哪里不对、哪里有问题，就直接改 prompt，重新提需求，AI 会自动帮你调整和优化，直到最后结果完全符合你的预期为止。整个过程你都沉浸在“说想法—&gt;看结果—&gt;继续调整—&gt;再出结果”的循环里，效率高得飞起。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/fe95a8d4-7fe9-428a-b3b5-4c547e1cf6fe"><img width="1640" height="1046" alt="Image" src="https://github.com/user-attachments/assets/fe95a8d4-7fe9-428a-b3b5-4c547e1cf6fe" style="max-width: 100%; height: auto; max-height: 1046px;"></a></p>
+<p>目前的现状是虽然大部分同学并不知道Vibe Coding的含义，但实际上是在按Vibe Coding的流程在做开发，具体表现为：从“帮我实现XX需求”一句话开始，一边写一边想，一边改一边调，主打一个"感觉"和"直觉"<br>
+Vibe Coding的致命缺陷<br>
+● 代码质量问题：生成代码存在一致性差（不同场景风格 / 质量差异大）、边界处理不完善（复杂业务逻辑漏判）、性能优化缺失、安全漏洞、AI自洽风险高<br>
+● 调试与维护困难：AI 生成代码呈 “黑盒特性”，程序员调试时间大幅增加。核心原因包括：缺乏全局思维（代码耦合度高、测试覆盖不足）、无追溯性（一次性生成大量代码，无法定位问题节点）、调试工具缺失（AI 仅依赖日志，不支持传统 Debug 工具）<br>
+● 用户体验差：稳定性不足（处理大型项目时频繁卡顿 / 崩溃，等待结果时间 30 秒 - 5 分钟）、界面设计缺陷、交互障碍（AI 无法准确理解意图，长链路任务上下文丢失）<br>
+1.2 规范编程（Spec Coding）<br>
+在生成任何代码之前，必须先通过结构化的文档明确需求、设计与任务，将规范文档作为开发的核心驱动力<br>
+采用 Vibe Coding 时体验过“5 分钟拿到惊艳 Demo”的高效，但一旦进入迭代、协作与合规场景，模型的上下文一致性与代码质量难以跨越“不可合并”的深坑。工程师与 AI 的对话常停留在自然语言层面，导致分歧与误解不断累积。Spec Coding 的核心思想是把口头需求先转化为清晰且可验收的规则（Spec），以此作为生成与评审的基准，再通过自动化审核把关质量，最终与企业流水线顺畅融合</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/72511864-66ef-4658-9001-b71bb0ea7600"><img width="800" height="900" alt="Image" src="https://github.com/user-attachments/assets/72511864-66ef-4658-9001-b71bb0ea7600" style="max-width: 100%; height: auto; max-height: 900px;"></a></p>
+<p>Spec Coding为什么能解决问题？<br>
+● 锁定上下文：大模型能完美理解几十页的 Spec 文档，保证逻辑一致性<br>
+● 前置质量把关：修改文档的成本远低于重构代码。<br>
+● 可协作：Spec 是人类可读的显性知识，解决了“只有 AI 和上帝知道这代码怎么跑的”问题<br>
+行业实践<br>
+行业内最早实践Spec 理念的是AWS Kiro，它将 Spec 理念工程化为可操作的三阶段工作流（需求、设计、任务）。后来不同团队根据自己对 Spec 的理解，推出了 Spec-kit、OpenSpec、Qoder Quest Mode、Cursor Plan Mode、Trae Solo等项目和工具</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/89540dbb-5138-46dc-b2e1-0f09cbf6de7f"><img width="1080" height="461" alt="Image" src="https://github.com/user-attachments/assets/89540dbb-5138-46dc-b2e1-0f09cbf6de7f" style="max-width: 100%; height: auto; max-height: 461px;"></a></p>
+<p><strong>总结</strong><br>
+Spec核心：用形式化、详尽的文档（Spec）作为唯一事实来源 (Single Source of Truth)，驱动 AI 生成代码。<br>
+思维转变：在传统思维中，文档是代码的注释；而在Spec Coding思维中，文档 (Spec) 是源代码，具体的代码只是 Spec 经过 AI 编译后的产物</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Zhou-Shuwu.github.io/zhoushuwu.github.io">十五的文档</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Zhou-Shuwu/zhoushuwu.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
